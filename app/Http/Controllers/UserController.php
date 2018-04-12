@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function register(Request $request)
     {
-        $credentials = $request->only(['username','password','name','email']);
+        $credentials = $request->only(['email','password','name',]);
         
         $credentials['password'] = \Hash::make($credentials['password']);
         
