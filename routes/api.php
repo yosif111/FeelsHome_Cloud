@@ -17,8 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('/login','UserController@login');
+Route::post('/register','UserController@register');
 Route::group(['middleware' => ['jwt.auth']],function(){
-
 Route::post('/modes/add','ModesController@addMode');
 Route::post('/modes/update','ModesController@editMode');
 Route::delete('modes/delete/{id}','ModesController@removeMode');
