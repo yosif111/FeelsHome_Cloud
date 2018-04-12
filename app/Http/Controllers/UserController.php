@@ -36,7 +36,7 @@ class UserController extends Controller
      */
     public function login(Request $request)
     {
-        $credentials = $request->only('username', 'password');
+        $credentials = $request->only('email', 'password');
         try {
             if (!$token = \JWTAuth::attempt($credentials)) {
                 return response()->json(['error' => 'credentials failed'], 401);
