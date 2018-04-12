@@ -13,7 +13,7 @@ class ModesController extends Controller
     public function addMode(Request $request){
         $fields = $request->only('name','playlist_name','playlist_uri');
         $fields['user_id'] = \JWTAuth::parseToken()->authenticate()->id;
-        if(!$fields['playlist_name']){
+        if(!isset($fields['playlist_name'])){
             $fields['playlist_name'] = 'default';
             $fields['playlist_uri'] = 'default';
         }
