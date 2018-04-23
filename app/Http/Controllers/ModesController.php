@@ -11,6 +11,7 @@ use App\Lights;
 class ModesController extends Controller
 {
     public function addMode(Request $request){
+        
         $fields = $request->only('name','playlist_name','playlist_uri');
         $fields['user_id'] = \JWTAuth::parseToken()->authenticate()->id;
         if(!isset($fields['playlist_name'])){
@@ -61,8 +62,8 @@ class ModesController extends Controller
 
     public function getAllModes(){
 
-        $modes = Modes::all();
-
+        $currentUser = \JWTAuth::parseToken()->authenticate();
+        $modes = Modes::where('user_id',$currentUser->id)->get();
         foreach($modes as &$mode){
             $mode['lights'] = Lights::where('mode_id',$mode->id)->get();
         }
